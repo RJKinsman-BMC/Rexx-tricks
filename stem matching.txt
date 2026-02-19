@@ -1,0 +1,11 @@
+DO i = 1 TO cpinv.0
+   cpinv_key = cpinv_key.i
+   IF \ndvinv.cpinv_key.ndvinv_stem THEN DO
+
+ndvinv. = 0 /* stem for ndvinv */
+
+ndvinv_key = ndvinv_listElm.i ndvinv_listType.i ndvinv_listSys.i,
+    ndvinv_listSubs.i ndvinv_listStg.i ndvinv_listVVLL.i
+ndvinv_key.i = ndvinv_key
+ndvinv.ndvinv_key.ndvinv_stem = 1
+
