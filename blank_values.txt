@@ -1,0 +1,5 @@
+dsn_line = applist.i,
+    WORD(WLBMTYPE '*',1),
+    WORD(WLBMCLAS '*',1),
+    WORD(WLBLVL '*',1),
+    WORD(WLBNAME '*',1)

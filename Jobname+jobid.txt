@@ -1,0 +1,7 @@
+ascbd=C2D(STORAGE(224,4))
+assbd=C2D(STORAGE(D2X(ascbd+X2D(150)),4))
+jsabd=C2D(STORAGE(D2X(assbd+X2D('a8')),4))
+
+jobid=STORAGE(D2X(jsabd+X2D(14)),8)
+
+jobName=STRIP(STORAGE(D2X(jsabd+X2D(1C)),8))

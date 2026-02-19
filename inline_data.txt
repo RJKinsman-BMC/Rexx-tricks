@@ -1,0 +1,20 @@
+SIGNAL A074_XTN_DTDo;A074_XTN_DTDo:
+xtn_line=SIGL+2;SIGNAL A074_XTN_DTDoo
+''
+'<!--'
+'<!DOCTYPE Transactions ['
+'<!ELEMENT Transactions (Transaction+)>'
+'<!ELEMENT Transaction (Date,Rule_TN?,Description,Categories*,'
+'Cat_Rule_ID?,Cat_rule_split?,Tran_Type,'
+'Tran_Num,Description_Original,Month)>'
+'<!ELEMENT Date (#PCDATA)>'
+'<!ELEMENT Rule_TN (#PCDATA)>'
+'<!ELEMENT Month (#PCDATA)>'
+']>'
+''
+'-->'
+''
+A074_XTN_DTDoo:
+DO xtn_sub=xtn_line WHILE SOURCELINE(xtn_sub) \= 'A074_XTN_DTDoo:'
+   INTERPRET 'xtno_rec = ' SOURCELINE(xtn_sub);CALL G110_xtn_out
+END

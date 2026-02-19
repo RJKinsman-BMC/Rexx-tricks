@@ -1,0 +1,56 @@
+SIGNAL ON NOVALUE                       /* Enable the conditions and  */
+SIGNAL ON SYNTAX                        /* point at reasonable        */
+SIGNAL ON FAILURE                       /* condition handling         */
+SIGNAL ON HALT
+
+/*
+
+Your code here...
+
+
+/* Test a variable to see if it was initialized */
+IF 'VAR' = SYMBOL('PARMVALUE1') THEN sw.PARMVALUE1 = 1
+
+*/
+
+/*
+   Condition handling
+
+   Taken from "What's wrong with Rexx?" by Walter Pachl, IBM Retiree
+   Downloaded from https://www.rexxla.org/presentations/2004/walterp.pdf
+
+*/
+NOVALUE:
+SAY 'Novalue raised in line' SIGL   /* line in error number       */
+SAY SOURCELINE(SIGL)                /* and text                   */
+SAY 'Variable' CONDITION('D')       /* the bad variable reference */
+SIGNAL Lookaround                   /* common interactive code    */
+
+SYNTAX:
+syntax_rc = rc                      /* Save the rc                */
+SAY 'Syntax raised in line' SIGL    /* line in error number       */
+SAY SOURCELINE(SIGL)                /* and text                   */
+                                    /* the error code and message */
+SAY 'rc='syntax_rc '('errortext(syntax_rc)')'
+
+HALT:
+Lookaround:                         /* common interactive code    */
+IF user_interface = 'FORE' THEN DO  /* when running in foreground */
+   SAY 'You can look around now.'   /* tell user what he can do   */
+   TRACE ?R                         /* start interactive trace    */
+   NOP                              /* and cause the first prompt */
+   END
+xrc=16 /* REXX return code */
+SIGNAL QUIT
+
+
+/*
+
+Novalue error example:
+
+Novalue raised in line 99  
+SAY 'parmvalue1' parmvalue1
+Variable PARMVALUE1        
+CPREXX Return Code=16      
+
+*/
