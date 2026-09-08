@@ -8,8 +8,8 @@ ADDRESS ISPEXEC
 'CONTROL REFLIST UPDATE'
 'LMOPEN DATAID('ISPFID') OPTION(OUTPUT)'
 
-SIGNAL C104_Member;C104_Member:
-mbr_line=SIGL+2;SIGNAL C104_Membero
+mbr_line=getLineNum()+2;SIGNAL C104_Membero
+/*
 MSG010 'ENTER THE PROGRAM NAME' .ALARM=YES
 'THE PROGRAM NAME IS REQUIRED TO RETRIEVE THE LISTING'
 MSG011 'FILE CHOICE IS BLANK' .ALARM=YES
@@ -22,8 +22,9 @@ MSG014 'Enter Required Field' .ALARM=YES
 'Enter your Compuware Source Listing (DDIO) File'
 MSG015 'Press Enter to continue' .ALARM=YES
 'Press Enter to specify source listing file'
+*/
 C104_Membero:
-DO sub=mbr_line WHILE SOURCELINE(sub) ^= 'C104_Membero:'
+DO sub=mbr_line WHILE SOURCELINE(sub) ^= '*/'
    line = SOURCELINE(sub)
    'LMPUT DATAID('ISPFID') DATALOC(LINE) MODE(INVAR) DATALEN(80)'
 END
@@ -33,3 +34,7 @@ END
 "LIBDEF ISPMLIB LIBRARY ID(OTFISPF) STACK"
 "LIBDEF ISPPLIB LIBRARY ID(OTFISPF) STACK"
 "LIBDEF ISPSLIB LIBRARY ID(OTFISPF) STACK"
+
+/* Return the current Line Number*/
+getLineNum:
+   return SIGL
