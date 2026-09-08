@@ -1,5 +1,5 @@
-SIGNAL A074_XTN_DTDo;A074_XTN_DTDo:
-xtn_line=SIGL+2;SIGNAL A074_XTN_DTDoo
+xtn_line=getLineNum()+2;SIGNAL A074_XTN_DTDo
+/*
 ''
 '<!--'
 '<!DOCTYPE Transactions ['
@@ -14,7 +14,12 @@ xtn_line=SIGL+2;SIGNAL A074_XTN_DTDoo
 ''
 '-->'
 ''
-A074_XTN_DTDoo:
-DO xtn_sub=xtn_line WHILE SOURCELINE(xtn_sub) \= 'A074_XTN_DTDoo:'
+*/
+A074_XTN_DTDo:
+DO xtn_sub=xtn_line WHILE SOURCELINE(xtn_sub) \= '*/'
    INTERPRET 'xtno_rec = ' SOURCELINE(xtn_sub);CALL G110_xtn_out
 END
+
+/* Return the current Line Number*/
+getLineNum:
+   return SIGL
